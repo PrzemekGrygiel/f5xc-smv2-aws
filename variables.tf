@@ -57,6 +57,12 @@ variable "aws_sli_subnets" {
   type = list(string)
   default = []
 }
+variable "aws_ext_subnets" {
+  type = list(string)
+}
+variable "aws_int_subnets" {
+  type = list(string)
+}
 variable "aws_vpc_cidr" {
   type = string
 }

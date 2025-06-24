@@ -16,6 +16,8 @@ module "aws" {
 
   aws_subnet_slo            = aws_subnet.slo[*].id
   aws_subnet_sli            = aws_subnet.sli[*].id
+  aws_subnet_ext            = aws_subnet.ext[*].id
+  aws_subnet_int            = aws_subnet.int[*].id
   aws_sg_allow_slo_traffic  = resource.aws_security_group.allow_slo_traffic.id
   aws_sg_allow_sli_traffic  = resource.aws_security_group.allow_sli_traffic.id
   tmm_interfaces            = var.tmm_interfaces

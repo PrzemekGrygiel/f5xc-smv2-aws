@@ -37,6 +37,38 @@ resource "aws_subnet" "sli" {
   }
 }
 
+resource "aws_subnet" "ext" {
+  count                   = length(var.aws_ext_subnets)
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = var.aws_ext_subnets[count.index]
+  map_public_ip_on_launch = false
+  availability_zone       = format("%s%s", var.aws_region, var.aws_availability_zones[count.index % length(var.aws_availability_zones)])
+  tags                    = {
+    Name    = format("%s-ext-%s", local.aws_vpc_name, var.aws_availability_zones[count.index % length(var.aws_availability_zones)])
+    Creator = var.aws_owner_tag
+  }
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+
+resource "aws_subnet" "int" {
+  count                   = length(var.aws_int_subnets)
+  vpc_id                  = aws_vpc.vpc.id
+  cidr_block              = var.aws_int_subnets[count.index]
+  map_public_ip_on_launch = false
+  availability_zone       = format("%s%s", var.aws_region, var.aws_availability_zones[count.index % length(var.aws_availability_zones)])
+  tags                    = {
+    Name    = format("%s-ext-%s", local.aws_vpc_name, var.aws_availability_zones[count.index % length(var.aws_availability_zones)])
+    Creator = var.aws_owner_tag
+  }
+  lifecycle {
+    ignore_changes = [tags]
+  }
+}
+
+
 resource "aws_internet_gateway" "gateway" {
   vpc_id = aws_vpc.vpc.id
 

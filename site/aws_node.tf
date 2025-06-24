@@ -5,7 +5,7 @@ module "aws-node" {
 
   master_node_count         = var.master_node_count
   worker_node_count         = var.worker_node_count
-  tmm_interfaces           = var.tmm_interfaces
+  tmm_interfaces            = var.tmm_interfaces
   ssh_public_key            = var.ssh_public_key
 
   aws_availability_zones    = var.aws_availability_zones
@@ -18,6 +18,8 @@ module "aws-node" {
 
   aws_subnet_slo            = var.aws_subnet_slo
   aws_subnet_sli            = var.aws_subnet_sli
+  aws_subnet_ext            = var.aws_subnet_ext
+  aws_subnet_int            = var.aws_subnet_int
   aws_sg_allow_slo_traffic  = var.aws_sg_allow_slo_traffic
   aws_sg_allow_sli_traffic  = var.aws_sg_allow_sli_traffic
   
