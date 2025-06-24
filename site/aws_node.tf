@@ -5,7 +5,7 @@ module "aws-node" {
 
   master_node_count         = var.master_node_count
   worker_node_count         = var.worker_node_count
-
+  tmm_interfaces           = var.tmm_interfaces
   ssh_public_key            = var.ssh_public_key
 
   aws_availability_zones    = var.aws_availability_zones

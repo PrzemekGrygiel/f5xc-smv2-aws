@@ -1,3 +1,15 @@
+resource "null_resource" "wait_for_token" {
+  provisioner "local-exec" {
+    command = <<EOT
+      while [ -z "$(echo '${var.f5xc_registration_token}' | xargs)" ]; do
+        echo "Waiting for f5xc_registration_token...";
+        sleep 5;
+      done
+      echo "f5xc_registration_token is available.";
+    EOT
+  }
+}
+
 resource "aws_instance" "master_vm" {
   count         = var.master_node_count
   ami           = var.aws_ami_id
@@ -21,6 +33,9 @@ resource "aws_instance" "master_vm" {
 
   user_data = templatefile("${path.module}/templates/cloud-config-base.tmpl", {
       node_registration_token = var.f5xc_registration_token
+      node_tmm_interfaces     = var.tmm_interfaces
+      
+      #node_tmm_interfaces     = join(var.tmm_interfaces, "\n        ")
   })
 
   tags = {
@@ -29,6 +44,8 @@ resource "aws_instance" "master_vm" {
     "kubernetes.io/cluster/${var.f5xc_cluster_name}" = "owned"
     Creator = var.aws_owner_tag
   }
+
+    depends_on = [null_resource.wait_for_token]
 }
 
 resource "aws_network_interface" "sm_slo_eni" {

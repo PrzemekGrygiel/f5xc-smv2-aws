@@ -14,6 +14,13 @@ variable "f5xc_api_url"        {}
 variable "f5xc_api_token"      {}
 variable "f5xc_tenant"         {}
 
+#TMM
+
+variable tmm_interfaces {
+  type = list(string)
+  description = "List of interface names for the TMM configuration."
+}
+
 # AWS
 
 variable "aws_access_key" {

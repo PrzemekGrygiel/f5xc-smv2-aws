@@ -1,4 +1,15 @@
+resource "null_resource" "wait_after_site" {
+  provisioner "local-exec" {
+    command = "sleep 10"
+  }
+
+  triggers = {
+    site_complete = restapi_object.site.id
+  }
+}
+
 resource "restapi_object" "token" {
+  depends_on  = [null_resource.wait_after_site]
   id_attribute = "metadata/name"
   path         = "/register/namespaces/system/tokens"
   data         = jsonencode({

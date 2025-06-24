@@ -1,6 +1,9 @@
 variable "f5xc_cluster_name" {}
 variable "f5xc_registration_token" {}
-
+variable tmm_interfaces {
+  type = list(string)
+  description = "List of interface names for the TMM configuration."
+}
 variable "ssh_public_key" {}
 variable "master_node_count" {
   type = number

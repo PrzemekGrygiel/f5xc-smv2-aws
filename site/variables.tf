@@ -37,6 +37,10 @@ variable "http_proxy" {
 variable "f5xc_api_url" {
   type = string
 }
+variable tmm_interfaces {
+  type = list(string)
+  description = "List of interface names for the TMM configuration."
+}
 variable "f5xc_api_token" {
   type = string
 }
