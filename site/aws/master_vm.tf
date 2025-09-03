@@ -30,26 +30,9 @@ resource "aws_instance" "master_vm" {
       device_index         = 1
     }
   }
-  dynamic "network_interface" {
-    for_each = range(0, length(var.aws_subnet_ext))
-    content {
-      network_interface_id = element(aws_network_interface.sm_ext_eni[*].id, count.index)
-      device_index         = 2
-    }
-  }
-  dynamic "network_interface" {
-    for_each = range(0, length(var.aws_subnet_int))
-    content {
-      network_interface_id = element(aws_network_interface.sm_int_eni[*].id, count.index)
-      device_index         = 3
-    }
-  }
 
   user_data = templatefile("${path.module}/templates/cloud-config-base.tmpl", {
       node_registration_token = var.f5xc_registration_token
-      node_tmm_interfaces     = var.tmm_interfaces
-      
-      #node_tmm_interfaces     = join(var.tmm_interfaces, "\n        ")
   })
 
   tags = {
@@ -83,27 +66,6 @@ resource "aws_network_interface" "sm_sli_eni" {
   }
 }
 
-resource "aws_network_interface" "sm_ext_eni" {
-  count           = length(var.aws_subnet_ext) > 0 ? var.master_node_count : 0
-  subnet_id       = element(var.aws_subnet_ext, count.index)
-  security_groups = [ var.aws_sg_allow_sli_traffic ]
-
-  tags = {
-    Name = format("%s-priv-eni-%d", var.f5xc_cluster_name, count.index)
-    Creator = var.aws_owner_tag
-  }
-}
-
-resource "aws_network_interface" "sm_int_eni" {
-  count           = length(var.aws_subnet_int) > 0 ? var.master_node_count : 0
-  subnet_id       = element(var.aws_subnet_int, count.index)
-  security_groups = [ var.aws_sg_allow_sli_traffic ]
-
-  tags = {
-    Name = format("%s-priv-eni-%d", var.f5xc_cluster_name, count.index)
-    Creator = var.aws_owner_tag
-  }
-}
 
 
 resource "aws_eip" "sm_pub_ips" {

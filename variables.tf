@@ -14,12 +14,6 @@ variable "f5xc_api_url"        {}
 variable "f5xc_api_token"      {}
 variable "f5xc_tenant"         {}
 
-#TMM
-
-variable tmm_interfaces {
-  type = list(string)
-  description = "List of interface names for the TMM configuration."
-}
 
 # AWS
 
@@ -57,12 +51,7 @@ variable "aws_sli_subnets" {
   type = list(string)
   default = []
 }
-variable "aws_ext_subnets" {
-  type = list(string)
-}
-variable "aws_int_subnets" {
-  type = list(string)
-}
+
 variable "aws_vpc_cidr" {
   type = string
 }

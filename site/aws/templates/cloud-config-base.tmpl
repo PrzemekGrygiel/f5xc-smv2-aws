@@ -5,10 +5,3 @@ write_files:
     owner: root
     content: |
       token: ${node_registration_token}
-  - path: /etc/vpm/tmm_interfaces
-    permissions: 644
-    owner: root
-    content: |
-%{ for interface in node_tmm_interfaces ~}
-          ${interface}
-%{ endfor ~}
