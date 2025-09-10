@@ -76,6 +76,11 @@ variable "slo_global_vn" {
 variable "aws_vpc_name" {}
 variable "aws_vpc_cidr" {}
 variable "aws_owner_tag" {}
+variable "aws_useremail_tag" {}
+variable "aws_environment_tag" {}
+variable "aws_costcenter_tag" {}
+variable "aws_manageremail_tag" {}
+variable "aws_team_tag" {}
 
 variable "aws_subnet_slo" {
   type = list(string)

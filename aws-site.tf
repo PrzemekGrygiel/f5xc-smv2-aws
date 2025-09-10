@@ -23,6 +23,11 @@ module "aws" {
 
   ssh_public_key            = var.ssh_public_key
   aws_owner_tag             = var.aws_owner_tag
+  aws_useremail_tag         = var.aws_useremail_tag
+  aws_environment_tag       = var.aws_environment_tag
+  aws_costcenter_tag        = var.aws_costcenter_tag
+  aws_manageremail_tag      = var.aws_manageremail_tag
+  aws_team_tag              = var.aws_team_tag
 
   f5xc_tenant               = var.f5xc_tenant
   f5xc_api_url              = var.f5xc_api_url

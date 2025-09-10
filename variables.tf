@@ -25,7 +25,31 @@ variable "aws_secret_key" {
   type = string
   default = ""
 }
+variable "aws_session_token" {
+  type = string
+  default = ""
+}
 variable "aws_owner_tag" {
+  type = string
+  default = ""
+}
+variable "aws_useremail_tag" {
+  type = string
+  default = ""
+}
+variable "aws_environment_tag" {
+  type = string
+  default = ""
+}
+variable "aws_costcenter_tag" {
+  type = string
+  default = ""
+}
+variable "aws_manageremail_tag" {
+  type = string
+  default = ""
+}
+variable "aws_team_tag" {
   type = string
   default = ""
 }

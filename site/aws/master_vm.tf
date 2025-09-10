@@ -40,6 +40,11 @@ resource "aws_instance" "master_vm" {
     ves-io-site-name = var.f5xc_cluster_name
     "kubernetes.io/cluster/${var.f5xc_cluster_name}" = "owned"
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
 
     depends_on = [null_resource.wait_for_token]
@@ -52,6 +57,11 @@ resource "aws_network_interface" "sm_slo_eni" {
   tags = {
     Name = format("%s-pub-eni-%d", var.f5xc_cluster_name, count.index)
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
 }
 
@@ -63,6 +73,11 @@ resource "aws_network_interface" "sm_sli_eni" {
   tags = {
     Name = format("%s-priv-eni-%d", var.f5xc_cluster_name, count.index)
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
 }
 

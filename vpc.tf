@@ -4,6 +4,11 @@ resource "aws_vpc" "vpc" {
   tags = {
     Name    = local.aws_vpc_name
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
 }
 
@@ -16,6 +21,11 @@ resource "aws_subnet" "slo" {
   tags                    = {
     Name    = format("%s-slo-%s", local.aws_vpc_name, var.aws_availability_zones[count.index % length(var.aws_availability_zones)])
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
   lifecycle {
     ignore_changes = [tags]
@@ -31,6 +41,11 @@ resource "aws_subnet" "sli" {
   tags                    = {
     Name    = format("%s-sli-%s", local.aws_vpc_name, var.aws_availability_zones[count.index % length(var.aws_availability_zones)])
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
   lifecycle {
     ignore_changes = [tags]
@@ -45,6 +60,11 @@ resource "aws_internet_gateway" "gateway" {
   tags = {
     Name = local.aws_vpc_name
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
 }
 
@@ -59,6 +79,11 @@ resource "aws_route_table" "public_rt" {
   tags = {
     Name = local.aws_vpc_name
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
 }
 
@@ -79,8 +104,13 @@ resource "aws_route_table" "rt" {
   tags = {
     Name = format("%s", local.aws_vpc_name)
     Creator = var.aws_owner_tag
-  } 
-} 
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
+  }
+}
 
 resource "aws_security_group" "allow_slo_traffic" {
   name        = "${local.aws_vpc_name}-allow-slo-traffic"
@@ -118,8 +148,13 @@ resource "aws_security_group" "allow_slo_traffic" {
   tags = {
     Name    = local.aws_vpc_name
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
-} 
+}
 
 resource "aws_security_group" "allow_sli_traffic" {
   name        = "${local.aws_vpc_name}-allow-sli-traffic"
@@ -143,8 +178,13 @@ resource "aws_security_group" "allow_sli_traffic" {
   tags = {
     Name    = local.aws_vpc_name
     Creator = var.aws_owner_tag
+    UserEmail = var.aws_useremail_tag
+    Environment = var.aws_environment_tag
+    CostCenter = var.aws_costcenter_tag
+    ManagerEmail = var.aws_manageremail_tag
+    Team = var.aws_team_tag
   }
-} 
+}
 
 output "vpc" {
   value = resource.aws_vpc.vpc

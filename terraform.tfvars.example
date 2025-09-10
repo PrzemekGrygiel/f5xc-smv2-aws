@@ -10,12 +10,24 @@ worker_node_count  = 0
 # AWS
 aws_access_key      = ""
 aws_secret_key      = ""
-aws_owner_tag       = "ex@mail.com"
-aws_region          = "us-east-2"
+aws_region          = "us-east-1"
+aws_instance_type   = "t3a.2xlarge" # 8 cores 32GB RAM
 aws_vpc_cidr        = "10.0.0.0/16"
 aws_availability_zones = [ "a", "b", "c"]
 aws_slo_subnets     = [ "10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
 aws_sli_subnets     = [ "10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24"]
+aws_ext_subnets     = [ "10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
+aws_int_subnets     = [ "10.0.31.0/24", "10.0.32.0/24", "10.0.33.0/24"]
 f5xc_api_url        = "https://tenant.console.ves.volterra.io/api"
 f5xc_api_token      = ""
 f5xc_tenant         = "tenant-........"
+aws_session_token   = ""
+
+# tags
+aws_owner_tag        = ""
+aws_useremail_tag    = ""
+aws_environment_tag  = ""
+aws_costcenter_tag   = ""
+aws_manageremail_tag = ""
+aws_team_tag         = ""
+
